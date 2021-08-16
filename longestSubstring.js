@@ -15,7 +15,7 @@
  */
 const storeCount = {};
 const longestSubstring = arryWords => {
-   
+   // setting up object with chars as key and frequency as value. 
     arryWords.map(words => {
        
         [...words].map(char => {
