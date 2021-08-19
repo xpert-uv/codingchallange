@@ -17,6 +17,7 @@
  * 
  */
 
+ //this function returns the longes substring and char from single string.
 const Substring=(s)=>
 {
  
@@ -44,24 +45,27 @@ const Substring=(s)=>
 
 
 
-//get perms
-let perms;
+//this function will get the array of words and shuffle them to get every single possible words
+// and run every words. 
+//let perms;
 
-function longestSubstring (arr, perms = [], len = arr.length) {
-  if (len === 1) perms.push(arr.slice(0))
+function longestSubstring (arr, shuffleWords = [], len = arr.length) {
+  if (len === 1) shuffleWords.push(arr.slice(0))
 
   for (let i = 0; i < len; i++) {
-   longestSubstring(arr, perms, len - 1)
+   longestSubstring(arr, shuffleWords, len - 1)
 
     len % 2 // parity dependent adjacent elements swap
       ? [arr[0], arr[len - 1]] = [arr[len - 1], arr[0]]
       : [arr[i], arr[len - 1]] = [arr[len - 1], arr[i]]
-  }
+    }
+    
+    // At this perms 
      let result=[];
-    for(let i=0; i<perms.length;i++){
+    for(let i=0; i<shuffleWords.length;i++){
         let words="";
-        for(let j = 0; j< perms[i].length; j++){
-            words+=perms[i][j]
+        for(let j = 0; j< shuffleWordss[i].length; j++){
+            words+=shuffleWords[i][j]
         }
         result.push(words);
     }
