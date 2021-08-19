@@ -20,69 +20,52 @@
 
 
 
- //this function returns the longes substring and char from single string.
+ //this function returns the longest substring char and its length from single string.
 
 function Substring(s)
 {
  
-    let ans = 1, temp = 1, val,tempVal;
-
- for (let i = 1; i < s.length; i++) {
-        // If character is same as
-        // previous increment temp value
-        if (s[i] == s[i - 1]) {
-            ++temp;
-            console.log("this is next char:" + s[i]);
-            console.log("this is prev char:" + s[i - 1]);
-            val=s[i];
-        }
-        else {
-            ans = Math.max(ans, temp);
-            tempVal=val;
-            val=s[i];
-            temp = 1;
-        }
-    }
-    ans = Math.max(ans, temp);
-    tempVal= val;
-    // Return the required answer
-    return {ans,tempVal};
+     let sub = s.match(/(.)\1*/g).sort((a,b)=>b.length-a.length)[0]
+     return [sub[0],sub.length];
 }
 
 
-
 //get perms
-let perms;
+let shuffelWords;
 
-function longestSubstring (arr, perms = [], len = arr.length) {
-  if (len === 1) perms.push(arr.slice(0))
+function longestSubstring (arr, shuffelWords = [], len = arr.length) {
+  if (len === 1) shuffelWords.push(arr.slice(0))
 
   for (let i = 0; i < len; i++) {
-   longestSubstring(arr, perms, len - 1)
+   longestSubstring(arr, shuffelWords, len - 1)
 
     len % 2 // parity dependent adjacent elements swap
       ? [arr[0], arr[len - 1]] = [arr[len - 1], arr[0]]
       : [arr[i], arr[len - 1]] = [arr[len - 1], arr[i]]
-  }
+    }
+    //loop over shuffelwords, concat them and store them in result. 
      let result=[];
-    for(let i=0; i<perms.length;i++){
+    for(let i=0; i<shuffelWords.length;i++){
         let words="";
-        for(let j = 0; j< perms[i].length; j++){
-            words+=perms[i][j]
+        for(let j = 0; j< shuffelWords[i].length; j++){
+            words+=shuffelWords[i][j]
         }
         result.push(words);
     }
 
+    // For each concat word pass it to find substring func.
  let letter=[], length=[];
   
   const almost = result.map(item=>{
       
       const returnVal =  Substring(item);
-      console.log(`this is ${item} and result is: ${returnVal.ans},${ returnVal.tempVal}`);
      
-      length.push(returnVal.ans);
-      letter.push(returnVal.tempVal);
-   }) 
+     // store the result in two seperate array [letter],[length].
+      length.push(returnVal[1]);
+      letter.push(returnVal[0]);
+  })
+    
+    //Finally, get max value form length and char form same index;
    
  return{ letters: letter[ length.indexOf(Math.max(...length))],
             length:Math.max(...length)
