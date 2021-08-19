@@ -8,24 +8,32 @@
  * no null / udefined character.
  */
 
-/** Step1: concat the words form array.
- * Step2: count the frequency of char from words
- * step3: return the object with higest frequency.
+/** Step1: concat the possible words form array.
+ * Step2: loop over each concat word
+ * Step3: store the result from each loop.
+ * Step4: get the max count. 
+ *  
+ **
  * 
  */
-const storeCount = {};
+
 const longestSubstring = arryWords => {
+    const storeCount = {};
    // setting up object with chars as key and frequency as value. 
     arryWords.map(words => {
-       
-        [...words].map(char => {
-            console.log(char);
-            if (storeCount[char]) {
-               storeCount[char]+=  1
+        let  sChar, pChar, sCount=0, pCount=0;
+        let eachWord = [...words];
+        for (let i = 0; i < eachWord.length - 1; i++){
+            if (eachWord[i] === eachWord[i + 1]) {
+                sCount ++;
             } else {
-                storeCount[char] = 1;
-            }                 
-            })
+                pCount++;
+            }
+        }
+
+            
+            
+           
     })
     
     // returns the highest frequency 
